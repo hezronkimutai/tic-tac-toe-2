@@ -72,18 +72,22 @@
         background: blue;
         color: white;
         text-align: center;
-        padding: 5px;
+        padding: 5px 10px;
         border: none;
-        margin: 5px auto;
+        margin: 5px 10px;
+    }
+
+    .footer {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
     }
 </style>
 
 <body>
     <div class="home_container">
         <h1 class="winner header">TIC TAC TOE</h1>
-        <button class="reset-btn" onClick="resetGame(this)">RESET GAME</button>
-        <button class="reset-btn" onClick="goBack(this)">GO BACK</button>
-        <h1 id="winner" class="scores"></h1>
+        <h1 id="winner" class="scores">Who will win?</h1>
         <div class="game_container">
             <div class="cell" id="11" value="11" onClick="play(this)">
             </div>
@@ -104,18 +108,21 @@
             <div class="cell" id="33" value="33" onClick="play(this)">
             </div>
         </div>
+        <div class="footer">
+            <button class="reset-btn" onClick="resetGame(this)">RESET GAME</button>
+            <button class="reset-btn" onClick="goBack(this)">GO BACK</button>
+        </div>
     </div>
 </body>
+
 <script>
-
-
     let playerOne = true;
     let playerOneScores = { x: { 1: [], 2: [], 3: [] }, y: { 1: [], 2: [], 3: [] } };
     let playerTwoScores = { x: { 1: [], 2: [], 3: [] }, y: { 1: [], 2: [], 3: [] } };
     let playerOneWithCenter = false;
     let playerTwoWithCenter = false;
-
     let idList = [];
+    let winner = false;
 
     const resetInitialVariables = () => {
         playerOne = true;
@@ -124,8 +131,8 @@
         playerOneWithCenter = false;
         playerTwoWithCenter = false;
         idList = [];
+        winner = false;
     }
-
 
     const resetGame = () => {
         let cells = document.getElementsByClassName('cell');
@@ -135,7 +142,6 @@
         });
         resetInitialVariables();
     };
-
 
     const goBack = () => {
         if (idList.length) {
@@ -163,63 +169,62 @@
     };
 
     const play = (element) => {
-        const x = element.id.split('')[0];
-        const y = element.id.split('')[1];
-        const cell = element.innerHTML = `<img src="./${playerOne ? 'x' : 'o'}.png" />`;
-        const winnerElement = document.getElementById("winner");
-        idList.push(element.id);
-        if (playerOne) {
-            playerOneScores.x[x].push(x);
-            playerOneScores.y[y].push(y);
-            if ((x - y == 0) && x == 2) {
-                playerOneWithCenter = true;
+        if (!winner) {
+            const x = element.id.split('')[0];
+            const y = element.id.split('')[1];
+            const cell = element.innerHTML = `<img src="./${playerOne ? 'x' : 'o'}.png" />`;
+            const winnerElement = document.getElementById("winner");
+            idList.push(element.id);
+            if (playerOne) {
+                playerOneScores.x[x].push(x);
+                playerOneScores.y[y].push(y);
+                if ((x - y == 0) && x == 2) {
+                    playerOneWithCenter = true;
+                }
+            } else {
+                playerTwoScores.x[x].push(x);
+                playerTwoScores.y[y].push(y);
+                if ((x - y == 0) && x == 2) {
+                    playerTwoWithCenter = true;
+                }
+            }
+            playerOne = !playerOne;
+            for (let i = 1; i <= 3; i++) {
+                if ((playerOneScores.x[i].length >= 3 && [...new Set(playerOneScores.x[i])].length === 1)
+                    || (playerOneScores.y[i].length >= 3 && [...new Set(playerOneScores.y[i])].length === 1)) {
+                    winnerElement.innerHTML = "Player X is the winner"
+                    winner = true;
+
+                }
+                if ((playerTwoScores.x[i].length >= 3 && [...new Set(playerTwoScores.x[i])].length === 1)
+                    || (playerTwoScores.y[i].length >= 3 && [...new Set(playerTwoScores.y[i])].length === 1)) {
+                    winnerElement.innerHTML = "Player O is the winner"
+                    winner = true;
+
+                }
+            }
+
+            if (playerOneWithCenter && (playerOneScores.x[1].length >= 1
+                && playerOneScores.x[2].length >= 1
+                && playerOneScores.x[3].length >= 1
+                && playerOneScores.y[1].length >= 1
+                && playerOneScores.y[2].length >= 1
+                && playerOneScores.y[3].length >= 1)) {
+                winnerElement.innerHTML = "Player X is the winner"
+                winner = true;
+
+            }
+            if (playerTwoWithCenter && (playerTwoScores.x[1].length >= 1
+                && playerTwoScores.x[2].length >= 1
+                && playerTwoScores.x[3].length >= 1
+                && playerTwoScores.y[1].length >= 1
+                && playerTwoScores.y[2].length >= 1
+                && playerTwoScores.y[3].length >= 1)) {
+                winnerElement.innerHTML = "Player O is the winner"
+                winner = true;
             }
         } else {
-            playerTwoScores.x[x].push(x);
-            playerTwoScores.y[y].push(y);
-            if ((x - y == 0) && x == 2) {
-                playerTwoWithCenter = true;
-            }
-        }
-        playerOne = !playerOne;
-        for (let i = 1; i <= 3; i++) {
-            if ((playerOneScores.x[i].length >= 3 && [...new Set(playerOneScores.x[i])].length === 1)
-                || (playerOneScores.y[i].length >= 3 && [...new Set(playerOneScores.y[i])].length === 1)) {
-                winnerElement.innerHTML = "winner X Replay!!!"
-                resetGame();
-                return;
-
-            }
-            if ((playerTwoScores.x[i].length >= 3 && [...new Set(playerTwoScores.x[i])].length === 1)
-                || (playerTwoScores.y[i].length >= 3 && [...new Set(playerTwoScores.y[i])].length === 1)) {
-                winnerElement.innerHTML = "winner O Replay"
-                resetGame();
-                return;
-
-            }
-        }
-
-        if (playerOneWithCenter && (playerOneScores.x[1].length >= 1
-            && playerOneScores.x[2].length >= 1
-            && playerOneScores.x[3].length >= 1
-            && playerOneScores.y[1].length >= 1
-            && playerOneScores.y[2].length >= 1
-            && playerOneScores.y[3].length >= 1)) {
-            winnerElement.innerHTML = "winner X Replay!!!"
             resetGame();
-            return;
-
-        }
-        if (playerTwoWithCenter && (playerTwoScores.x[1].length >= 1
-            && playerTwoScores.x[2].length >= 1
-            && playerTwoScores.x[3].length >= 1
-            && playerTwoScores.y[1].length >= 1
-            && playerTwoScores.y[2].length >= 1
-            && playerTwoScores.y[3].length >= 1)) {
-            winnerElement.innerHTML = "winner O Replay"
-            resetGame();
-            return;
-
         }
     };
 </script>
