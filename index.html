@@ -2,231 +2,264 @@
 <html>
 
 <head>
-    <title>
-        tic tac toe game
-    </title>
+    <title>Tic Tac Toe Game</title>
+    <style>
+        body {
+            background: rgb(3, 19, 27);
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .home_container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .game_container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            width: 60%;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+            height: 30%;
+            min-height: 80px;
+            border: 1px solid blue;
+            border-radius: 10px;
+            margin: 5px;
+        }
+
+        .cell img {
+            width: 70px;
+            height: 70px;
+            object-fit: fill;
+            border-radius: 10px;
+        }
+
+        .header {
+            color: blue;
+            text-align: center;
+        }
+
+        .scores {
+            color: white;
+            text-align: center;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .reset-btn {
+            border-radius: 10px;
+            background: blue;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .header img {
+            height: 50px;
+            width: 50px;
+            margin: auto;
+            padding: 0px 5px;
+        }
+    </style>
 </head>
-<style>
-    p {
-        color: red;
-    }
-
-    body {
-        background-color: transparent;
-        backface-visibility: visible;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-image: url('grace.jpg');
-    }
-
-    .home_container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 90vh;
-        flex-direction: column;
-    }
-
-    .game_container {
-        background-color: black;
-        width: 60%;
-        height: 100%;
-        opacity: 0.8;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        align-items: center;
-        border-radius: 10px;
-    }
-
-    .cell {
-        height: 30%;
-        width: 30%;
-        background-color: black;
-        border: 1px solid blue;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .cell>img {
-        object-fit: fill;
-        border-radius: 10px;
-        margin: auto;
-    }
-
-    .header {
-        width: 100%;
-        color: blue;
-        text-align: center
-    }
-
-    .scores {
-        color: white;
-        text-align: center
-    }
-
-    .reset-btn {
-        border-radius: 10px;
-        background: blue;
-        color: white;
-        text-align: center;
-        padding: 5px 10px;
-        border: none;
-        margin: 5px 10px;
-    }
-
-    .footer {
-        display: flex;
-        justify-content: center;
-        flex-direction: row;
-    }
-</style>
 
 <body>
     <div class="home_container">
-        <h1 class="winner header">TIC TAC TOE</h1>
-        <h1 id="winner" class="scores">Who will win?</h1>
+        <div class="header">
+            <img src="https://res.cloudinary.com/hezzie/image/upload/v1720883292/tic-tac-toe_zdpv5z.png" />
+            <h1 class="header">TIC TAC TOE</h1>
+        </div>
+        <h1 id="winner" class="scores"></h1>
         <div class="game_container">
-            <div class="cell" id="11" value="11" onClick="play(this)">
-            </div>
-            <div class="cell" id="12" value="12" onClick="play(this)">
-            </div>
-            <div class="cell" id="13" value="13" onClick="play(this)">
-            </div>
-            <div class="cell" id="21" value="21" onClick="play(this)">
-            </div>
-            <div class="cell" id="22" value="22" onClick="play(this)">
-            </div>
-            <div class="cell" id="23" value="23" onClick="play(this)">
-            </div>
-            <div class="cell" id="31" value="31" onClick="play(this)">
-            </div>
-            <div class="cell" id="32" value="32" onClick="play(this)">
-            </div>
-            <div class="cell" id="33" value="33" onClick="play(this)">
-            </div>
+            <div class="cell" id="11" value="11" onclick="play(this)"></div>
+            <div class="cell" id="12" value="12" onclick="play(this)"></div>
+            <div class="cell" id="13" value="13" onclick="play(this)"></div>
+            <div class="cell" id="21" value="21" onclick="play(this)"></div>
+            <div class="cell" id="22" value="22" onclick="play(this)"></div>
+            <div class="cell" id="23" value="23" onclick="play(this)"></div>
+            <div class="cell" id="31" value="31" onclick="play(this)"></div>
+            <div class="cell" id="32" value="32" onclick="play(this)"></div>
+            <div class="cell" id="33" value="33" onclick="play(this)"></div>
         </div>
         <div class="footer">
-            <button class="reset-btn" onClick="resetGame(this)">RESET GAME</button>
-            <button class="reset-btn" onClick="goBack(this)">GO BACK</button>
+            <button class="reset-btn" onclick="resetGame()">RESET GAME</button>
+            <button class="reset-btn" onclick="goBack()">GO BACK</button>
         </div>
     </div>
-</body>
 
-<script>
-    let playerOne = true;
-    let playerOneScores = { x: { 1: [], 2: [], 3: [] }, y: { 1: [], 2: [], 3: [] } };
-    let playerTwoScores = { x: { 1: [], 2: [], 3: [] }, y: { 1: [], 2: [], 3: [] } };
-    let playerOneWithCenter = false;
-    let playerTwoWithCenter = false;
-    let idList = [];
-    let winner = false;
+    <script>
+        let playerOne = true;
+        let playerOneScores = { x: { 1: [], 2: [], 3: [] }, y: { 1: [], 2: [], 3: [] } };
+        let playerTwoScores = { x: { 1: [], 2: [], 3: [] }, y: { 1: [], 2: [], 3: [] } };
+        let playerOneWithCenter = false;
+        let playerTwoWithCenter = false;
+        let idList = [];
+        let winner = false;
 
-    const resetInitialVariables = () => {
-        playerOne = true;
-        playerOneScores = { x: { 1: [], 2: [], 3: [] }, y: { 1: [], 2: [], 3: [] } };
-        playerTwoScores = { x: { 1: [], 2: [], 3: [] }, y: { 1: [], 2: [], 3: [] } };
-        playerOneWithCenter = false;
-        playerTwoWithCenter = false;
-        idList = [];
-        winner = false;
-    }
+        const resetInitialVariables = () => {
+            playerOne = true;
+            playerOneScores = { x: { 1: [], 2: [], 3: [] }, y: { 1: [], 2: [], 3: [] } };
+            playerTwoScores = { x: { 1: [], 2: [], 3: [] }, y: { 1: [], 2: [], 3: [] } };
+            playerOneWithCenter = false;
+            playerTwoWithCenter = false;
+            idList = [];
+            winner = false;
+        };
 
-    const resetGame = () => {
-        let cells = document.getElementsByClassName('cell');
-        cells = [...cells];
-        cells.map(cell => {
-            cell.innerHTML = '';
-        });
-        resetInitialVariables();
-    };
+        const resetGame = () => {
+            document.getElementById("winner").innerHTML = "";
+            document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = '');
+            resetInitialVariables();
+        };
 
-    const goBack = () => {
-        if (idList.length) {
-            const removedId = idList[idList.length - 1];
-            const x = removedId.split('')[0];
-            const y = removedId.split('')[1];
-            const elementToRemove = document.getElementById(removedId);
-            elementToRemove.innerHTML = '';
-            if (!playerOne) {
-                playerOneScores.x[x].pop();
-                playerOneScores.y[y].pop();
-                if ((x - y == 0) && x == 2) {
-                    playerOneWithCenter = false;
+        const goBack = () => {
+            document.getElementById("winner").innerHTML = "";
+            if (idList.length) {
+                const removedId = idList.pop();
+                const [x, y] = removedId.split('');
+                const elementToRemove = document.getElementById(removedId);
+                elementToRemove.innerHTML = '';
+                if (!playerOne) {
+                    playerOneScores.x[x].pop();
+                    playerOneScores.y[y].pop();
+                    if (x === '2' && y === '2') {
+                        playerOneWithCenter = false;
+                    }
+                } else {
+                    playerTwoScores.x[x].pop();
+                    playerTwoScores.y[y].pop();
+                    if (x === '2' && y === '2') {
+                        playerTwoWithCenter = false;
+                    }
                 }
-            } else {
-                playerTwoScores.x[x].pop();
-                playerTwoScores.y[y].pop();
-                if ((x - y == 0) && x == 2) {
-                    playerTwoWithCenter = false;
+                playerOne = !playerOne;
+            }
+        };
+
+        const play = (element) => {
+            if (!winner && !element.innerHTML) {
+                makeMove(element, 'x');
+                if (!winner) {
+                    setTimeout(computerMove, 500);
                 }
             }
-            playerOne = !playerOne;
-            idList.pop();
-        }
-    };
+        };
 
-    const play = (element) => {
-        if (!winner) {
-            const x = element.id.split('')[0];
-            const y = element.id.split('')[1];
-            const cell = element.innerHTML = `<img src="./${playerOne ? 'x' : 'o'}.png" />`;
-            const winnerElement = document.getElementById("winner");
+        const makeMove = (element, player) => {
+            const [x, y] = element.id.split('');
+            element.innerHTML = `<img src="./${player}.png" alt="${player}" class="imgItem" />`;
             idList.push(element.id);
-            if (playerOne) {
-                playerOneScores.x[x].push(x);
-                playerOneScores.y[y].push(y);
-                if ((x - y == 0) && x == 2) {
-                    playerOneWithCenter = true;
-                }
-            } else {
-                playerTwoScores.x[x].push(x);
-                playerTwoScores.y[y].push(y);
-                if ((x - y == 0) && x == 2) {
-                    playerTwoWithCenter = true;
+            const scores = player === 'x' ? playerOneScores : playerTwoScores;
+            scores.x[x].push(x);
+            scores.y[y].push(y);
+            if (x === '2' && y === '2') {
+                if (player === 'x') playerOneWithCenter = true;
+                else playerTwoWithCenter = true;
+            }
+            checkWinner();
+        };
+
+        const computerMove = () => {
+            if (winner) return;
+            const move = findWinningMove('o') || findWinningMove('x') || findCenterMove() || findCornerMove() || findSideMove();
+            if (move) {
+                makeMove(move, 'o');
+            }
+        };
+
+        const findWinningMove = (player) => {
+            for (let cell of document.getElementsByClassName('cell')) {
+                if (!cell.innerHTML) {
+                    cell.innerHTML = `<img src="./${player}.png" alt="${player}" class="imgItem" />`;
+                    if (checkWinner()) {
+                        cell.innerHTML = '';
+                        return cell;
+                    }
+                    cell.innerHTML = '';
                 }
             }
-            playerOne = !playerOne;
+            return null;
+        };
+
+        const findCenterMove = () => document.getElementById('22').innerHTML ? null : document.getElementById('22');
+
+        const findCornerMove = () => {
+            const corners = ['11', '13', '31', '33'];
+            for (let corner of corners) {
+                const cell = document.getElementById(corner);
+                if (!cell.innerHTML) {
+                    return cell;
+                }
+            }
+            return null;
+        };
+
+        const findSideMove = () => {
+            const sides = ['12', '21', '23', '32'];
+            for (let side of sides) {
+                const cell = document.getElementById(side);
+                if (!cell.innerHTML) {
+                    return cell;
+                }
+            }
+            return null;
+        };
+
+        const checkWinner = () => {
+            const winnerElement = document.getElementById("winner");
             for (let i = 1; i <= 3; i++) {
-                if ((playerOneScores.x[i].length >= 3 && [...new Set(playerOneScores.x[i])].length === 1)
-                    || (playerOneScores.y[i].length >= 3 && [...new Set(playerOneScores.y[i])].length === 1)) {
-                    winnerElement.innerHTML = "Player X is the winner"
+                if ((playerOneScores.x[i].length >= 3 && new Set(playerOneScores.x[i]).size === 1)
+                    || (playerOneScores.y[i].length >= 3 && new Set(playerOneScores.y[i]).size === 1)) {
+                    winnerElement.innerHTML = "Player X is the winner";
                     winner = true;
-
                 }
-                if ((playerTwoScores.x[i].length >= 3 && [...new Set(playerTwoScores.x[i])].length === 1)
-                    || (playerTwoScores.y[i].length >= 3 && [...new Set(playerTwoScores.y[i])].length === 1)) {
-                    winnerElement.innerHTML = "Player O is the winner"
+                if ((playerTwoScores.x[i].length >= 3 && new Set(playerTwoScores.x[i]).size === 1)
+                    || (playerTwoScores.y[i].length >= 3 && new Set(playerTwoScores.y[i]).size === 1)) {
+                    winnerElement.innerHTML = "Player O is the winner";
                     winner = true;
-
                 }
             }
-
-            if (playerOneWithCenter && (playerOneScores.x[1].length >= 1
-                && playerOneScores.x[2].length >= 1
-                && playerOneScores.x[3].length >= 1
-                && playerOneScores.y[1].length >= 1
-                && playerOneScores.y[2].length >= 1
-                && playerOneScores.y[3].length >= 1)) {
-                winnerElement.innerHTML = "Player X is the winner"
-                winner = true;
-
-            }
-            if (playerTwoWithCenter && (playerTwoScores.x[1].length >= 1
-                && playerTwoScores.x[2].length >= 1
-                && playerTwoScores.x[3].length >= 1
-                && playerTwoScores.y[1].length >= 1
-                && playerTwoScores.y[2].length >= 1
-                && playerTwoScores.y[3].length >= 1)) {
-                winnerElement.innerHTML = "Player O is the winner"
+            if (playerOneWithCenter && Object.values(playerOneScores.x).every(arr => arr.length >= 1)
+                && Object.values(playerOneScores.y).every(arr => arr.length >= 1)) {
+                winnerElement.innerHTML = "Player X is the winner";
                 winner = true;
             }
-        } else {
-            resetGame();
-        }
-    };
-</script>
+            if (playerTwoWithCenter && Object.values(playerTwoScores.x).every(arr => arr.length >= 1)
+                && Object.values(playerTwoScores.y).every(arr => arr.length >= 1)) {
+                winnerElement.innerHTML = "Player O is the winner";
+                winner = true;
+            }
+        };
+    </script>
+</body>
 
 </html>
